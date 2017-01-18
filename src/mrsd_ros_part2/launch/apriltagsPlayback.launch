@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+
+  <!-- Startup the apriltag identification node -->
+  <include file="$(find mrsd_ros_part2)/launch/apriltags.launch"/>
+
+  <!-- Startup your modified apriltag wrapper node -->
+  <!-- TODO -->
+
+  <!-- Launch the image viewer and subscribe to the marked_april_tag topic -->
+  <node name="AprilTagID" pkg="image_view" type ="image_view">
+    <remap from="image" to="marked_april_tag" />
+  </node>
+
+  <!-- Play the ROS bag -->
+  <!-- TODO -->
+
+</launch>
