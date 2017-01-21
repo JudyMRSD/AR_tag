@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   cmake_modules
   message_generation
   geometry_msgs
+  tf
 )
 find_package(OpenCV REQUIRED)
 find_package(Eigen REQUIRED)

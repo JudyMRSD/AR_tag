@@ -40,6 +40,9 @@
 #include "apriltags.h"
 #include <apriltags/AprilTagDetections.h>
 
+#include<tf/transform_broadcaster.h>
+#include <tf/transform_listener.h>
+#include <tf/transform_datatypes.h>
 
 using namespace std;
 
@@ -53,8 +56,17 @@ using namespace std;
 
 void chatterCallback(const apriltags::AprilTagDetections::ConstPtr& msg)
 {
-ROS_INFO("AprilTags node started.");
+  ROS_INFO("AprilTags node started.");
   cout<<msg->header.frame_id;
+}
+
+void updateTF()
+{
+  static tf::TransformBroadcaster br;
+  tf::Transform tf_kinect_bin;
+  
+  br.sendTransform(tf::StampedTransform(tf_kinect_bin, ros::Time::now(), "map","kinect2_rgb_optal_frame"));
+
 }
 
 int main(int argc, char **argv)
@@ -71,3 +83,7 @@ int main(int argc, char **argv)
 
   return 0;
 }
+
+
+
+
