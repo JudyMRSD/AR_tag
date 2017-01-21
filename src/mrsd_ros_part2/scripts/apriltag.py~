@@ -69,7 +69,7 @@ class AprilTagMarker:
     print(self.cy);
     
     self.center = (int(self.cx), int(self.cy));
-    cv2.circle(self.image, self.center, 20, (0,255,0),-1);
+    cv2.circle(self.image, self.center, 20, (0,255,0));
 
     
     ########################

@@ -74,7 +74,7 @@ install(TARGETS apriltags
 
 #tf
 add_executable(apriltag_kinect_tf src/apriltag_kinect_tf.cpp)
-target_link_libraries(apriltag_kinect_tf ${catkin_LIBRARIES}
+target_link_libraries(apriltags ${catkin_LIBRARIES}
                                 ${Eigen_LIBRARIES}
                                 ${OpenCV_LIBRARIES}
                                 ${Yaml_LIBRARIES}    
