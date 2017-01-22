@@ -39,6 +39,7 @@
 
 #include "apriltags.h"
 #include <apriltags/AprilTagDetections.h>
+#include <apriltags/AprilTagDetection.h>
 
 #include<tf/transform_broadcaster.h>
 #include <tf/transform_listener.h>
@@ -56,16 +57,21 @@ using namespace std;
 
 void chatterCallback(const apriltags::AprilTagDetections::ConstPtr& msg)
 {
-  ROS_INFO("AprilTags node started.");
-  cout<<msg->header.frame_id;
-}
+  //ROS_INFO("AprilTags node started.");
 
-void updateTF()
-{
+  //cout<<msg->detections[0].pose.position.x;
+
+//update tf
+ 
   static tf::TransformBroadcaster br;
   tf::Transform tf_kinect_bin;
-  
-  br.sendTransform(tf::StampedTransform(tf_kinect_bin, ros::Time::now(), "map","kinect2_rgb_optal_frame"));
+  tf_kinect_bin.setOrigin(tf::Vector3(msg->detections[0].pose.position.x,msg->detections[0].pose.position.y,msg->detections[0].pose.position.z));
+  tf_kinect_bin.setRotation(tf::Quaternion(msg->detections[0].pose.orientation.x,msg->detections[0].pose.orientation.y,msg->detections[0].pose.orientation.z,msg->detections[0].pose.orientation.w));
+
+ //tf_kinect_bin.setOrigin( tf::Vector3(0.0, 2.0, 0.0) );
+ //tf_kinect_bin.setRotation( tf::Quaternion(0, 0, 0, 1) );
+//send tf to rviz
+  br.sendTransform(tf::StampedTransform(tf_kinect_bin, ros::Time::now(), "world","kinect2_rgb_optical_frame"));
 
 }
 
@@ -83,7 +89,3 @@ int main(int argc, char **argv)
 
   return 0;
 }
-
-
-
-
